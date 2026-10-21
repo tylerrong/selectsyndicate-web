@@ -1,10 +1,14 @@
 import type { NextConfig } from "next";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const root = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
-  /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {
+    root,
     rules: {
       "*.css": {
         loaders: ["@tailwindcss/turbopack"],
