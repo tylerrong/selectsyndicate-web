@@ -35,7 +35,7 @@ export function AppPreview() {
         scale: isMobile ? 0.92 : 0.88,
         rotateX: isMobile ? 1 : 6,
       });
-      if (copyTop) gsap.set(copyTop, { y: 16, opacity: 0.5 });
+      if (copyTop) gsap.set(copyTop, { y: 10, opacity: 0.55 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -49,7 +49,7 @@ export function AppPreview() {
         },
       });
 
-      tl.fromTo(stage, { scale: 0.96 }, { scale: 1, ease: "none" }, 0);
+      tl.fromTo(stage, { scale: 0.97 }, { scale: 1, ease: "none" }, 0);
 
       if (copyTop) {
         tl.to(copyTop, { y: 0, opacity: 1, ease: "none" }, 0);
@@ -58,8 +58,8 @@ export function AppPreview() {
       tl.to(
         phone,
         {
-          y: isMobile ? -8 : -40,
-          scale: isMobile ? 1.01 : 1.06,
+          y: isMobile ? -4 : -28,
+          scale: isMobile ? 1.01 : 1.05,
           rotateX: 0,
           ease: "none",
         },
@@ -74,43 +74,45 @@ export function AppPreview() {
     <section
       ref={sectionRef}
       id="app"
-      className="relative z-20 flex min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-[#f7f7f5] px-4 py-12 text-[#0a0e14] md:px-8 md:py-20"
+      className="relative z-20 flex min-h-[100svh] flex-col items-center justify-center gap-5 overflow-hidden bg-[#f7f7f5] px-4 py-10 text-[#0a0e14] md:gap-7 md:px-8 md:py-16"
       aria-labelledby="app-heading"
       style={{ perspective: "1400px" }}
     >
       <div
         ref={copyTopRef}
-        className="relative z-20 mb-6 max-w-[640px] px-1 text-center will-change-transform md:mb-10"
+        className="relative z-20 max-w-[18ch] px-1 text-center will-change-transform"
       >
         <h2
           id="app-heading"
-          className="display text-[clamp(32px,8vw,60px)]"
+          className="display text-[clamp(34px,5.2vw,56px)] tracking-[-0.035em]"
         >
           Syndicate,
           <br />
-          where members already are.
+          where members
+          <br />
+          already are.
         </h2>
       </div>
 
       <div
         ref={stageRef}
-        className="relative z-10 flex w-full max-w-[720px] items-end justify-center overflow-hidden rounded-[1.75rem] will-change-transform md:rounded-[2.75rem]"
+        className="relative z-10 flex w-full max-w-[680px] items-end justify-center overflow-hidden rounded-[1.75rem] will-change-transform md:rounded-[2.5rem]"
         style={{
           background:
             "linear-gradient(180deg, #e8e9e6 0%, #ddded9 55%, #d0d1cb 100%)",
           boxShadow:
             "0 40px 90px rgba(10,14,20,0.1), inset 0 1px 0 rgba(255,255,255,0.7)",
-          minHeight: "min(48svh, 420px)",
-          paddingTop: "2.25rem",
+          minHeight: "min(44svh, 400px)",
+          paddingTop: "1.5rem",
           paddingBottom: 0,
         }}
       >
         <div
           ref={phoneRef}
-          className="relative w-[min(48vw,220px)] origin-bottom will-change-transform sm:w-[min(56vw,260px)] md:w-[290px]"
+          className="relative w-[min(50vw,230px)] origin-bottom will-change-transform sm:w-[min(54vw,250px)] md:w-[280px]"
           style={{ transformStyle: "preserve-3d" }}
         >
-          <div className="translate-y-[14%] md:translate-y-[16%]">
+          <div className="translate-y-[10%] md:translate-y-[12%]">
             <IPhoneFrame
               finish="dark"
               src="/assets/syndicate-app.mp4"
