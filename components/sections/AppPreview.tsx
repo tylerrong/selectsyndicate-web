@@ -8,8 +8,8 @@ import { IPhoneFrame } from "../IPhoneFrame";
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Avec-inspired phone jump-out. Headline + device only —
- * supporting copy lives in Experience next.
+ * Avec-inspired phone jump-out. Headline sits tight above the stage;
+ * the device fills the well and rises on scrub.
  */
 export function AppPreview() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -31,25 +31,25 @@ export function AppPreview() {
 
     const ctx = gsap.context(() => {
       gsap.set(phone, {
-        y: isMobile ? 36 : 80,
-        scale: isMobile ? 0.92 : 0.88,
-        rotateX: isMobile ? 1 : 6,
+        y: isMobile ? 24 : 48,
+        scale: isMobile ? 0.94 : 0.9,
+        rotateX: isMobile ? 0 : 4,
       });
-      if (copyTop) gsap.set(copyTop, { y: 10, opacity: 0.55 });
+      if (copyTop) gsap.set(copyTop, { y: 8, opacity: 0.65 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: isMobile ? "+=70%" : "+=160%",
+          end: isMobile ? "+=70%" : "+=140%",
           pin: true,
-          scrub: isMobile ? 0.45 : 0.65,
+          scrub: isMobile ? 0.4 : 0.55,
           anticipatePin: 1,
           invalidateOnRefresh: true,
         },
       });
 
-      tl.fromTo(stage, { scale: 0.97 }, { scale: 1, ease: "none" }, 0);
+      tl.fromTo(stage, { scale: 0.98 }, { scale: 1, ease: "none" }, 0);
 
       if (copyTop) {
         tl.to(copyTop, { y: 0, opacity: 1, ease: "none" }, 0);
@@ -58,8 +58,8 @@ export function AppPreview() {
       tl.to(
         phone,
         {
-          y: isMobile ? -4 : -28,
-          scale: isMobile ? 1.01 : 1.05,
+          y: isMobile ? -6 : -20,
+          scale: 1,
           rotateX: 0,
           ease: "none",
         },
@@ -74,51 +74,50 @@ export function AppPreview() {
     <section
       ref={sectionRef}
       id="app"
-      className="relative z-20 flex min-h-[100svh] flex-col items-center justify-center gap-5 overflow-hidden bg-[#f7f7f5] px-4 py-10 text-[#0a0e14] md:gap-7 md:px-8 md:py-16"
+      className="relative z-20 flex min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-[#f7f7f5] px-5 py-12 text-[#0a0e14] md:px-8 md:py-16"
       aria-labelledby="app-heading"
       style={{ perspective: "1400px" }}
     >
-      <div
-        ref={copyTopRef}
-        className="relative z-20 max-w-[18ch] px-1 text-center will-change-transform"
-      >
-        <h2
-          id="app-heading"
-          className="display text-[clamp(34px,5.2vw,56px)] tracking-[-0.035em]"
-        >
-          Syndicate,
-          <br />
-          where members
-          <br />
-          already are.
-        </h2>
-      </div>
-
-      <div
-        ref={stageRef}
-        className="relative z-10 flex w-full max-w-[680px] items-end justify-center overflow-hidden rounded-[1.75rem] will-change-transform md:rounded-[2.5rem]"
-        style={{
-          background:
-            "linear-gradient(180deg, #e8e9e6 0%, #ddded9 55%, #d0d1cb 100%)",
-          boxShadow:
-            "0 40px 90px rgba(10,14,20,0.1), inset 0 1px 0 rgba(255,255,255,0.7)",
-          minHeight: "min(44svh, 400px)",
-          paddingTop: "1.5rem",
-          paddingBottom: 0,
-        }}
-      >
+      <div className="flex w-full max-w-[720px] flex-col items-center">
         <div
-          ref={phoneRef}
-          className="relative w-[min(50vw,230px)] origin-bottom will-change-transform sm:w-[min(54vw,250px)] md:w-[280px]"
-          style={{ transformStyle: "preserve-3d" }}
+          ref={copyTopRef}
+          className="relative z-20 mb-4 w-full text-center will-change-transform md:mb-5"
         >
-          <div className="translate-y-[10%] md:translate-y-[12%]">
-            <IPhoneFrame
-              finish="dark"
-              src="/assets/syndicate-app.mp4"
-              poster="/assets/syndicate-app-poster.png"
-              label="Screen recording of Select Syndicate inside the Select mobile app"
-            />
+          <h2
+            id="app-heading"
+            className="display mx-auto max-w-[16ch] text-[clamp(36px,5vw,52px)] tracking-[-0.035em] leading-[1.08]"
+          >
+            Syndicate,
+            <br />
+            where members already are.
+          </h2>
+        </div>
+
+        <div
+          ref={stageRef}
+          className="relative z-10 flex w-full items-end justify-center overflow-hidden rounded-[1.5rem] will-change-transform md:rounded-[2.25rem]"
+          style={{
+            background:
+              "linear-gradient(180deg, #e8e9e6 0%, #ddded9 55%, #d0d1cb 100%)",
+            boxShadow:
+              "0 32px 72px rgba(10,14,20,0.1), inset 0 1px 0 rgba(255,255,255,0.7)",
+            height: "min(52svh, 460px)",
+            paddingTop: "1.25rem",
+          }}
+        >
+          <div
+            ref={phoneRef}
+            className="relative w-[min(58vw,240px)] origin-bottom will-change-transform md:w-[270px]"
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            <div className="translate-y-[18%] md:translate-y-[20%]">
+              <IPhoneFrame
+                finish="dark"
+                src="/assets/syndicate-app.mp4"
+                poster="/assets/syndicate-app-poster.png"
+                label="Screen recording of Select Syndicate inside the Select mobile app"
+              />
+            </div>
           </div>
         </div>
       </div>
