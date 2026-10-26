@@ -30,10 +30,11 @@ export function AppPreview() {
     const isMobile = window.matchMedia("(max-width: 820px)").matches;
 
     const ctx = gsap.context(() => {
+      // Keep travel modest so the device top never clips the stage edge
       gsap.set(phone, {
-        y: isMobile ? 24 : 48,
-        scale: isMobile ? 0.94 : 0.9,
-        rotateX: isMobile ? 0 : 4,
+        y: isMobile ? 28 : 40,
+        scale: isMobile ? 0.95 : 0.92,
+        rotateX: isMobile ? 0 : 3,
       });
       if (copyTop) gsap.set(copyTop, { y: 8, opacity: 0.65 });
 
@@ -58,7 +59,7 @@ export function AppPreview() {
       tl.to(
         phone,
         {
-          y: isMobile ? -6 : -20,
+          y: 0,
           scale: 1,
           rotateX: 0,
           ease: "none",
@@ -101,16 +102,17 @@ export function AppPreview() {
               "linear-gradient(180deg, #e8e9e6 0%, #ddded9 55%, #d0d1cb 100%)",
             boxShadow:
               "0 32px 72px rgba(10,14,20,0.1), inset 0 1px 0 rgba(255,255,255,0.7)",
-            height: "min(52svh, 460px)",
-            paddingTop: "1.25rem",
+            height: "min(56svh, 500px)",
+            paddingTop: "2.5rem",
           }}
         >
           <div
             ref={phoneRef}
-            className="relative w-[min(58vw,240px)] origin-bottom will-change-transform md:w-[270px]"
+            className="relative w-[min(56vw,236px)] origin-bottom will-change-transform md:w-[268px]"
             style={{ transformStyle: "preserve-3d" }}
           >
-            <div className="translate-y-[18%] md:translate-y-[20%]">
+            {/* Sink only the bottom — keep the device top fully inside the well */}
+            <div className="translate-y-[10%] md:translate-y-[12%]">
               <IPhoneFrame
                 finish="dark"
                 src="/assets/syndicate-app.mp4"
