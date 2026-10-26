@@ -113,18 +113,19 @@ export function IPhoneFrame({
         <div
           className="relative overflow-hidden bg-black"
           style={{
-            aspectRatio: "9 / 19.5",
+            // Match the capture (780×1696) so object-cover doesn't skew sides
+            aspectRatio: "780 / 1696",
             borderRadius: "2.4rem",
             boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.35)",
           }}
         >
-          {/* Scale past the status-bar / recording chrome baked into the capture */}
+          {/* Mild center crop — trims recording chrome without shifting the bottom */}
           <video
             ref={videoRef}
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover object-[center_14%]"
             style={{
-              transform: "scale(1.08)",
-              transformOrigin: "center 18%",
+              transform: "scale(1.04)",
+              transformOrigin: "center center",
             }}
             src={src}
             poster={poster}
